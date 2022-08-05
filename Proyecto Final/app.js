@@ -50,13 +50,13 @@ const productos = {
       producto7: {
         nombre: 'Combo gamer',
         precio: '150000',
-        descripcion: 'Los monitores para gaming se llaman así porque están diseñados para las necesidades muy específicas de los videojuegos. ',
+        descripcion: 'Combo gamer! todo lo que necesitas para jugar lo encuetnras en este combo ',
         srcImg: './img/a4672493299562a34fe4f5c3c2abf853.png'
       },
       producto8: {
         nombre: 'Laptop gamer',
         precio: '79999',
-        descripcion: 'Los monitores para gaming se llaman así porque están diseñados para las necesidades muy específicas de los videojuegos. ',
+        descripcion: 'Laptop alta gama. procesadores y graficas altamente avanzadas capaces de soportar cualquier tipo de juego ',
         srcImg: './img/notebookgamer-removebg-preview.png'
       }
   }
@@ -149,15 +149,13 @@ const productos = {
           title: 'Haz vaciado el carrito',
           icon: 'info',
           confirmButtonText: 'Ok'
+          
         })
       }) 
      
       //Botones aumentar y disminuir cantidades
-       
     }
   }
-
-  
   tbodyCarrito.addEventListener('click', e => {
     
     if(e.target.classList.contains('button')) {
@@ -188,6 +186,7 @@ const productos = {
     pintarFooter()
   }
 
+  //ALERTA DE AGREGAR PRODUCTO AL CARRITO
       function pololo() {
         document.getElementById("pololo")
         Swal.fire({
@@ -198,3 +197,37 @@ const productos = {
           timer: 2000
         })
       }
+          //BOTON ENVIAR (FINALIZAR COMPRA)//
+              async function funcionComprar() {
+                const { value: email } = await Swal.fire({
+                   title: 'Ingrese su email para enviar la cotización',
+                   input: 'email',
+                   inputLabel: 'Email de contacto',
+                   inputPlaceholder: 'ingrese su Email'
+                })
+                if (email) {
+                   Swal.fire({
+                      title: 'Enviando...',
+                      timer: 2000,
+                      didOpen: () => {
+                         Swal.showLoading()
+                      },
+                   })
+                      .then((result) => {
+                         Swal.fire(
+                          
+                            `La cotizacion  de <p class="resaltar"> ${email} </p> fue enviada con exito. A la brevedad nos contactaremos`
+                         )
+                      })}}
+
+
+    //FORMULARIO//
+    const checkbox = document.querySelector('.my-form input[type="checkbox"]');
+					const btns = document.querySelectorAll(".my-form button");
+					
+					checkbox.addEventListener("change", function() {
+					  const checked = this.checked;
+					  for (const btn of btns) {
+						checked ? (btn.disabled = false) : (btn.disabled = true);
+					  }
+					});
